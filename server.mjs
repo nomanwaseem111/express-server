@@ -3,7 +3,7 @@ import cors from 'cors'
 const app = express()
 app.use(express.json())
 app.use(cors())
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.get('/user', (req, res) => {
   res.send('Hello World!')
