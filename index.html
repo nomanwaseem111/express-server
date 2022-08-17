@@ -66,13 +66,17 @@
             const password = document.getElementById('password').value;
             const repeatPassword = document.getElementById('repeatPassword').value;
 
-            axios.post('/user', {
+            if(password !== repeatPassword){
+                document.getElementById('message').innerHTML = "Password do not match"
+                return;
+            }
+
+            axios.post('https://express-server-mjs.herokuapp.com/signup', {
                 
                  firstname,
                  lastname,
                  email,
                  password,
-                 repeatPassword
             })
                 .then(function (response) {
                     console.log(response.data);
@@ -80,7 +84,9 @@
                     document.getElementById('message').innerHTML = response.data.message;
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log(error.response.data.message);
+                    document.getElementById('message').innerHTML = error.response.data.message;
+
                 });
 
 

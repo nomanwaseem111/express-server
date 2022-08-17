@@ -28,19 +28,35 @@ app.post('/signup', (req, res) => {
         return;
     }
 
+    let isFound = false
+
+    for(let i = 0; i < userBase.length; i++){
+        if(userBase[i].email === body.email.toLowerCase()){
+            isFound = true
+            break;
+        }
+    }
+    
+    if(isFound){
+       res.status(400).send(
+        {
+            message : `email ${body.email} already Exist`}
+        )
+    }
+
 
     let newUser = {
         userId: nanoid(),
         firstname: body.firstname,
         lastname: body.lastname,
-        email: body.email,
+        email: body.email.toLowerCase(),
         password: body.password
 
     }
 
     userBase.push(newUser);
 
-    res.status(201).send('User Created')
+    res.status(201).send({message : 'User Created'})
 
 })
 
