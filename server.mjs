@@ -40,7 +40,7 @@ app.post('/signup', (req, res) => {
     if(isFound){
        res.status(400).send(
         {
-            message : `email ${body.email} already Exist`}
+            message : `This Email is Already Exist`}
         )
     }
 
