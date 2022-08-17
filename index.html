@@ -12,7 +12,7 @@
 
 <body>
 
-    <h1>Login Form</h1>
+    <h1>Signup Form</h1>
 
     <form onsubmit="signUp(); return false">
 
@@ -50,7 +50,28 @@
 
 
 
+    <h1>Login Form</h1>
 
+    <form onsubmit="login(); return false">
+
+
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" required>
+        <br>
+        <br>
+
+        <label for="password"> Password :</label>
+        <input type="password" id="password" required>
+        <br>
+        <br>
+
+
+        <input type="submit" name="" value="Login">
+
+    </form>
+
+    <p id="message2"></p>
 
 
 
@@ -66,17 +87,17 @@
             const password = document.getElementById('password').value;
             const repeatPassword = document.getElementById('repeatPassword').value;
 
-            if(password !== repeatPassword){
+            if (password !== repeatPassword) {
                 document.getElementById('message').innerHTML = "Password do not match"
                 return;
             }
 
             axios.post('https://express-server-mjs.herokuapp.com/signup', {
-                
-                 firstname,
-                 lastname,
-                 email,
-                 password,
+
+                firstname,
+                lastname,
+                email,
+                password,
             })
                 .then(function (response) {
                     console.log(response.data);
@@ -93,6 +114,37 @@
 
         }
 
+
+
+
+        const login = () => {
+
+           
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+          
+
+            axios.post('https://express-server-mjs.herokuapp.com/login', {
+
+            
+                email,
+                password,
+            })
+                .then(function (response) {
+                    console.log(response.data);
+
+                    document.getElementById('message2').innerHTML = response.data.message;
+                })
+                .catch(function (error) {
+                    console.log(error.response.data.message);
+                    document.getElementById('message2').innerHTML = error.response.data.message;
+
+                });
+
+
+
+        }
 
 
 

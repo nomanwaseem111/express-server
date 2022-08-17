@@ -82,7 +82,7 @@ app.post('/login', (req, res) => {
 
     for (let i = 0; i < userBase.length; i++) {
 
-        if (userBase[i].email == body.email) {
+        if (userBase[i].email == body.email.toLowerCase()) {
                 
              isFound = true
             if (userBase[i].password == body.password) {
@@ -92,7 +92,7 @@ app.post('/login', (req, res) => {
 
                     firstname: userBase[i].firstname,
                     lastname: userBase[i].lastname,
-                    email: userBase[i].email,
+                    email: userBase[i].email.toLowerCase(),
                     message: "Login successful"
                 })
                 return;
